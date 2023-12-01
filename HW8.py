@@ -65,7 +65,7 @@ class TestHW8(unittest.TestCase):
     def setUp(self):
         self.rest_dict = {
             'food_type': 'Cafe',
-            'building_number': 1101,
+            'building_number': '1101',
             'star_rating': 3.8,
             'num_ratings': 543
         }
