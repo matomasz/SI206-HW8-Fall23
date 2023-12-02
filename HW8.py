@@ -63,6 +63,9 @@ def main():  # Try calling your functions here
 
 class TestHW8(unittest.TestCase):
     def setUp(self):
+        file = 'South_U_Restaurants.db'
+        source_dir = os.path.dirname(__file__)
+        self.full_path = os.path.join(source_dir, file)
         self.rest_dict = {
             'food_type': 'Cafe',
             'building_number': '1101',
@@ -126,7 +129,7 @@ class TestHW8(unittest.TestCase):
             self.w_avg_food_type[0], self.w_avg_building_num[0]]
 
     def test_load_restaurant_data(self):
-        rest_data = load_restaurant_data('South_U_Restaurants.db')
+        rest_data = load_restaurant_data(self.full_path)
         self.assertIsInstance(rest_data, dict)
         self.assertEqual(
             rest_data['M-36 Coffee Roasters Cafe'], self.rest_dict)
@@ -134,7 +137,7 @@ class TestHW8(unittest.TestCase):
 
     def test_plot_best_star_ratings_by_food_type(self):
         food_type_data = plot_best_star_ratings_by_food_type(
-            'South_U_Restaurants.db')
+            self.full_path)
         self.assertIsInstance(food_type_data, dict)
         for key in food_type_data:
             self.assertAlmostEqual(
@@ -143,14 +146,14 @@ class TestHW8(unittest.TestCase):
 
     def test_find_restaurants_in_building(self):
         restaurant_list = find_restaurants_in_building(
-            1140, 'South_U_Restaurants.db')
+            1140, self.full_path)
         self.assertIsInstance(restaurant_list, list)
         self.assertEqual(len(restaurant_list), 3)
         self.assertEqual(restaurant_list[0], 'BTB Burrito')
 
     def test_get_highest_weighted_average_ratings(self):
         food_type_ratings = get_highest_weighted_average_ratings(
-            'South_U_Restaurants.db')
+            self.full_path)
         self.assertEqual(food_type_ratings, self.highest_weighted_ratings)
 
 
